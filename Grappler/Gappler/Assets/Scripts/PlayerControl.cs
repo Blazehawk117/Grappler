@@ -83,30 +83,32 @@ public class PlayerControl : MonoBehaviour
                 sprintJumped = false;
 
             //Jumping
-            if (Input.GetAxis("Jump") > 0.01 && grounded && !crouching) 
+            if (Input.GetAxis("Jump") > 0.01 && grounded && !crouching)
             {
                 if (Input.GetKey(KeyCode.LeftShift))
                     sprintJumped = true;
                 velocityAtJump = rb.velocity;
                 speedMag = Vector3.Magnitude(new Vector3(rb.velocity.x, 0f, rb.velocity.z));
-                rb.velocity = new Vector3(rb.velocity.x,jumpForce,rb.velocity.y);
+                rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.y);
             }
 
             //Sliding
             if (slideInput > 0.1f)
             {
-                if (rb.velocity.magnitude > 2/3*speed && grounded && !sliding && !crouching)
+                if (rb.velocity.magnitude > speed * 1.5f && grounded && !sliding && !crouching)
                 {
                     originalSlideVelocity = rb.velocity;
-                    incrementX = originalSlideVelocity.x * 0.3f;
-                    incrementZ = originalSlideVelocity.z * 0.3f;
+                    incrementX = originalSlideVelocity.x * 0.7f;
+                    incrementZ = originalSlideVelocity.z * 0.7f;
                     sliding = true;
+                    rb.velocity = new Vector3(rb.velocity.x * 1.2f, rb.velocity.y,rb.velocity.z*1.2f);
                     cameraAnchor.position = new Vector3(cameraAnchor.position.x, cameraAnchor.position.y - 1, cameraAnchor.position.z);
                     playerBoxCollider.size = new Vector3(playerBoxCollider.size.x, 1, playerBoxCollider.size.z);
                     playerBoxCollider.center = new Vector3(playerBoxCollider.center.x, -0.5f, playerBoxCollider.center.z);
 
                 }
-                else if(!crouching && grounded && !sliding) {
+                else if (!crouching && grounded && !sliding)
+                {
                     cameraAnchor.position = new Vector3(cameraAnchor.position.x, cameraAnchor.position.y - 1, cameraAnchor.position.z);
                     playerBoxCollider.size = new Vector3(playerBoxCollider.size.x, 1, playerBoxCollider.size.z);
                     playerBoxCollider.center = new Vector3(playerBoxCollider.center.x, -0.5f, playerBoxCollider.center.z);
@@ -114,7 +116,8 @@ public class PlayerControl : MonoBehaviour
                 }
             }
 
-            if (crouching && slideInput < 0.01) {
+            if (crouching && slideInput < 0.01)
+            {
                 cameraAnchor.position = new Vector3(cameraAnchor.position.x, cameraAnchor.position.y + 1, cameraAnchor.position.z);
                 playerBoxCollider.size = new Vector3(playerBoxCollider.size.x, 2, playerBoxCollider.size.z);
                 playerBoxCollider.center = new Vector3(playerBoxCollider.center.x, 0, playerBoxCollider.center.z);
@@ -131,11 +134,12 @@ public class PlayerControl : MonoBehaviour
                     sliding = false;
                 }
 
-                if (Vector3.Magnitude(rb.velocity) > 0.1)
+                if (Vector3.Magnitude(rb.velocity) > 0.2f)
                 {
                     rb.velocity = new Vector3(rb.velocity.x - incrementX * Time.deltaTime, rb.velocity.y, rb.velocity.z - incrementZ * Time.deltaTime);
                 }
-                else {
+                else
+                {
                     sliding = false;
                     crouching = true;
                 }
@@ -178,14 +182,14 @@ public class PlayerControl : MonoBehaviour
                 {
                     rb.velocity = .5f * forwardVelocity + .5f * horizontalVelocity + verticalVelocity;
                 }
-               
-                    /*
-                     * For Jumping
-                    float tempYVelocity = rb.velocity.y;
-                    rb.velocity = transform.forward * speedMag;
-                    rb.velocity = new Vector3(rb.velocity.x, tempYVelocity, rb.velocity.z);
-                    */
-               
+
+                /*
+                 * For Jumping
+                float tempYVelocity = rb.velocity.y;
+                rb.velocity = transform.forward * speedMag;
+                rb.velocity = new Vector3(rb.velocity.x, tempYVelocity, rb.velocity.z);
+                */
+
 
                 //Shoot Grappling hook
                 if (Input.GetAxis("Fire2") > 0.1 && !shooting && grappleCD >= grappleCDMax)
@@ -198,25 +202,26 @@ public class PlayerControl : MonoBehaviour
                     grappleCD += Time.deltaTime;
                 }
             }
-          
+
         }
     }
 
     public void ShootGrapplingHook()
     {
-       grappleCD = 0;
-       setShooting(true);
-       GameObject hook = Instantiate(grapplingHook,hookLaunchPoint.position,GameObject.Find("Main Camera").transform.rotation); 
+        grappleCD = 0;
+        setShooting(true);
+        GameObject hook = Instantiate(grapplingHook, hookLaunchPoint.position, GameObject.Find("Main Camera").transform.rotation);
     }
 
-    public void setShooting(bool value) {
+    public void setShooting(bool value)
+    {
         shooting = value;
     }
 
-    public void moveToHook() 
+    public void moveToHook()
     {
         grappleDir = grappleTarget.position - transform.position;
         grappleDir = grappleDir / grappleDir.magnitude;
-        rb.velocity = grappleDir*hookSpeed;
+        rb.velocity = grappleDir * hookSpeed;
     }
 }

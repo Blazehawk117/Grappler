@@ -22,7 +22,6 @@ public class StaminaBar : MonoBehaviour
     void Update()
     {
         cdBar.value = playerControlReference.curStamina / playerControlReference.maxStamina;
-        Debug.Log(cdBar.value);
         if (playerControlReference.canSprint)
         {
             img.color = originalColor;
