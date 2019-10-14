@@ -155,12 +155,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grappleDistance: 20
   speed: 5
-  sprintSpeed: 10
+  sprintSpeed: 15
   strafeSpeed: 5
   shooting: 0
   grappled: 0
   grappleCD: 0
-  grappleCDMax: 2
+  grappleCDMax: 10
   grappleTarget: {fileID: 0}
   hookSpeed: 30
   maxStamina: 1

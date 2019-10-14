@@ -147,7 +147,7 @@ public class PlayerControl : MonoBehaviour
             }
             else
             {
-
+                //Sprinting
                 if (Input.GetKey(KeyCode.LeftShift) && curStamina > 0 && grounded && canSprint || sprintJumped)
                 {
                     if (!sprintJumped)
@@ -223,5 +223,6 @@ public class PlayerControl : MonoBehaviour
         grappleDir = grappleTarget.position - transform.position;
         grappleDir = grappleDir / grappleDir.magnitude;
         rb.velocity = grappleDir * hookSpeed;
+       
     }
 }
