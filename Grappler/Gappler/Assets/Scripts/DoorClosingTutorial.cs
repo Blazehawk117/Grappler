@@ -15,10 +15,8 @@ public class DoorClosingTutorial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(transform.position.y);
         if (transform.position.y > 12)
         {
-            Debug.Log("Schmoovin");
             transform.position = new Vector3(transform.position.x, transform.position.y - doorSpeed, transform.position.z);
         }
     }

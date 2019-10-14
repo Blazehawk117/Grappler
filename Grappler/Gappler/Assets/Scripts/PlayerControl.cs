@@ -148,12 +148,9 @@ public class PlayerControl : MonoBehaviour
             else
             {
                 //Sprinting
-                if (Input.GetKey(KeyCode.LeftShift) && curStamina > 0 && grounded && canSprint || sprintJumped)
+                if (Input.GetKey(KeyCode.LeftShift) && curStamina > 0 && grounded && canSprint && rb.velocity.magnitude > 0.3f || sprintJumped)
                 {
-                    if (!sprintJumped)
-                    {
-                        curStamina -= 0.2f * Time.deltaTime;
-                    }
+                    curStamina -= 0.2f * Time.deltaTime; 
                     forwardVelocity = transform.forward * sprintSpeed * vert;
                 }
                 else
