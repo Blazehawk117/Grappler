@@ -85,7 +85,7 @@ public class PlayerControl : MonoBehaviour
             //Jumping
             if (Input.GetAxis("Jump") > 0.01 && grounded && !crouching)
             {
-                if (Input.GetKey(KeyCode.LeftShift))
+                if (Input.GetKey(KeyCode.LeftShift) && curStamina > 0 && grounded && canSprint && rb.velocity.magnitude > 0.3f)
                     sprintJumped = true;
                 velocityAtJump = rb.velocity;
                 speedMag = Vector3.Magnitude(new Vector3(rb.velocity.x, 0f, rb.velocity.z));

@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/TitleScreen.unity
+    guid: 46a7efb98ec446d47a2c42b62f1fddc1
+  - enabled: 1
     path: Assets/Scenes/MovementTut.unity
     guid: 17d981622ee8ddc488d341d57267fd76
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: b6a3240d86d52cf4089cce5d9630a025
   m_configObjects: {}
