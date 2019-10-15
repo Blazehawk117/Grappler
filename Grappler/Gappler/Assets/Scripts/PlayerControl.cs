@@ -66,6 +66,9 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F5)) {
+            Application.LoadLevel(1);
+        }
         if (grappled)
         {
             moveToHook();
