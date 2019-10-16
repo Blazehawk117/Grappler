@@ -17,7 +17,7 @@ public class DoorClosingTutorial : MonoBehaviour
     {
         if (transform.position.y > 12)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y - doorSpeed, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y - doorSpeed * Time.deltaTime, transform.position.z);
         }
     }
 }

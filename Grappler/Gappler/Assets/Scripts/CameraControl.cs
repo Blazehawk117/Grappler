@@ -155,6 +155,12 @@ public class CameraControl : MonoBehaviour
         sensitivityY = val;
     }
 
+    public void SetBuffer(Slider slider)
+    {
+        float val = slider.value;
+        frameCounter = val;
+    }
+
     public static float ClampAngle(float angle, float min, float max)
     {
         angle = angle % 360;
